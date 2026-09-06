@@ -20,7 +20,7 @@ Route::prefix('admin')->group(function () {
 });
 
 // Admin Protected Routes (Requires Auth)
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
 
     // Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');

@@ -1,0 +1,156 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\SEO;
+use Illuminate\Database\Seeder;
+
+class SEOSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $pages = [
+            [
+                'page_slug' => 'home',
+                'page_title' => 'Home',
+                'meta_title' => 'Snap Spirit Studio - Premium Photography & Cinematography',
+                'meta_description' => 'Capture your moments with Snap Spirit Studio. Expert photography and cinematography for weddings, events, commercial projects, and creative productions in Ahmedabad.',
+                'meta_keywords' => 'photography, cinematography, wedding photographer, video production, Ahmedabad, professional photography',
+                'og_title' => 'Snap Spirit Studio - Premium Photography & Cinematography',
+                'og_description' => 'Capturing stories through premium photography and cinematography for weddings, events, brands, and creative projects.',
+                'og_image' => asset('assets/images/og-home.jpg'),
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary_large_image',
+                'twitter_title' => 'Snap Spirit Studio',
+                'twitter_description' => 'Premium Photography & Cinematography Services',
+                'page_type' => 'homepage',
+                'is_active' => true,
+            ],
+            [
+                'page_slug' => 'about',
+                'page_title' => 'About Us',
+                'meta_title' => 'About Snap Spirit Studio - Our Story & Mission',
+                'meta_description' => 'Learn about Snap Spirit Studio. Discover our journey, mission, and the team dedicated to capturing your most precious moments.',
+                'meta_keywords' => 'about us, our story, team, photography studio, Ahmedabad',
+                'og_title' => 'About Snap Spirit Studio',
+                'og_description' => 'Discover our journey and mission to capture your precious moments.',
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary',
+                'page_type' => 'about',
+                'is_active' => true,
+            ],
+            [
+                'page_slug' => 'services',
+                'page_title' => 'Services',
+                'meta_title' => 'Photography & Videography Services - Snap Spirit Studio',
+                'meta_description' => 'Explore our comprehensive services including wedding photography, event coverage, commercial shoots, and creative cinematography.',
+                'meta_keywords' => 'photography services, videography, wedding photography, event photography, commercial photography',
+                'og_title' => 'Our Services - Snap Spirit Studio',
+                'og_description' => 'Premium photography and videography services for weddings, events, and commercial projects.',
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary',
+                'page_type' => 'services',
+                'is_active' => true,
+            ],
+            [
+                'page_slug' => 'portfolio',
+                'page_title' => 'Portfolio',
+                'meta_title' => 'Our Work - Portfolio | Snap Spirit Studio',
+                'meta_description' => 'View our impressive portfolio of wedding photography, event coverage, and creative projects showcasing our expertise and style.',
+                'meta_keywords' => 'portfolio, work samples, wedding photography, event photography, photography projects',
+                'og_title' => 'Our Portfolio - Snap Spirit Studio',
+                'og_description' => 'Explore our stunning collection of photography and cinematography projects.',
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary_large_image',
+                'page_type' => 'portfolio',
+                'is_active' => true,
+            ],
+            [
+                'page_slug' => 'team',
+                'page_title' => 'Our Team',
+                'meta_title' => 'Meet Our Team - Snap Spirit Studio',
+                'meta_description' => 'Meet the talented photographers and videographers behind Snap Spirit Studio. Dedicated professionals with years of experience.',
+                'meta_keywords' => 'team, photographers, videographers, professionals, creative team',
+                'og_title' => 'Our Team - Snap Spirit Studio',
+                'og_description' => 'Talented photographers and videographers dedicated to capturing your stories.',
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary',
+                'page_type' => 'team',
+                'is_active' => true,
+            ],
+            [
+                'page_slug' => 'gallery',
+                'page_title' => 'Gallery',
+                'meta_title' => 'Photo Gallery - Snap Spirit Studio',
+                'meta_description' => 'Browse our beautiful gallery of wedding, event, and commercial photography. High-quality images showcasing our work.',
+                'meta_keywords' => 'gallery, photos, images, wedding gallery, event gallery',
+                'og_title' => 'Photo Gallery - Snap Spirit Studio',
+                'og_description' => 'Stunning collection of our photography work.',
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary_large_image',
+                'page_type' => 'gallery',
+                'is_active' => true,
+            ],
+            [
+                'page_slug' => 'contact',
+                'page_title' => 'Contact Us',
+                'meta_title' => 'Contact Snap Spirit Studio - Get in Touch',
+                'meta_description' => 'Get in touch with Snap Spirit Studio. Share your project details and let us help capture your special moments.',
+                'meta_keywords' => 'contact, inquiry, photography booking, get in touch',
+                'og_title' => 'Contact Snap Spirit Studio',
+                'og_description' => 'Reach out to us for your photography and videography needs.',
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary',
+                'page_type' => 'contact',
+                'is_active' => true,
+            ],
+            [
+                'page_slug' => 'privacy-policy',
+                'page_title' => 'Privacy Policy',
+                'meta_title' => 'Privacy Policy - Snap Spirit Studio',
+                'meta_description' => 'Read our privacy policy to understand how we protect and use your personal information.',
+                'meta_keywords' => 'privacy, privacy policy, data protection',
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary',
+                'page_type' => 'legal',
+                'is_active' => true,
+            ],
+            [
+                'page_slug' => 'terms',
+                'page_title' => 'Terms & Conditions',
+                'meta_title' => 'Terms & Conditions - Snap Spirit Studio',
+                'meta_description' => 'Review our terms and conditions for using Snap Spirit Studio services.',
+                'meta_keywords' => 'terms, conditions, legal, terms of service',
+                'og_type' => 'website',
+                'robots' => 'index, follow',
+                'author' => 'Snap Spirit Studio',
+                'twitter_card' => 'summary',
+                'page_type' => 'legal',
+                'is_active' => true,
+            ],
+        ];
+
+        foreach ($pages as $page) {
+            SEO::updateOrCreate(
+                ['page_slug' => $page['page_slug']],
+                $page
+            );
+        }
+    }
+}

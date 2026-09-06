@@ -12,8 +12,8 @@
 
 /* Sidebar */
 .admin-sidebar {
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #0B0B0B;
+    color: #F7F7F5;
     padding: 20px 0;
     position: fixed;
     width: 250px;
@@ -24,13 +24,14 @@
 
 .sidebar-header {
     padding: 20px;
-    border-bottom: 1px solid #34495e;
+    border-bottom: 1px solid #3D3D3D;
     margin-bottom: 20px;
 }
 
 .sidebar-header h2 {
     font-size: 18px;
     margin: 0;
+    color: #B8A07A;
 }
 
 .sidebar-nav ul {
@@ -44,20 +45,22 @@
 .sidebar-nav a {
     display: block;
     padding: 12px 20px;
-    color: #ecf0f1;
+    color: #A7A39B;
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
 }
 
 .sidebar-nav a:hover {
-    background-color: #34495e;
-    border-left-color: #3498db;
+    background-color: #1a1a1a;
+    border-left-color: #B8A07A;
+    color: #F7F7F5;
     padding-left: 24px;
 }
 
 .sidebar-nav a.active {
-    background-color: #3498db;
-    border-left-color: #3498db;
+    background-color: #B8A07A;
+    border-left-color: #B8A07A;
+    color: #0B0B0B;
 }
 
 /* Admin Content Area */
@@ -69,18 +72,19 @@
 
 /* Admin Header */
 .admin-header {
-    background-color: #fff;
+    background-color: #F7F7F5;
     padding: 20px 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #E8E8E8;
 }
 
 .page-title {
     margin: 0;
     font-size: 24px;
-    color: #2c3e50;
+    color: #0B0B0B;
 }
 
 .header-right {
@@ -95,9 +99,14 @@
     gap: 15px;
 }
 
+.user-name {
+    color: #3D3D3D;
+    font-weight: 500;
+}
+
 .btn-logout {
     padding: 8px 16px;
-    background-color: #e74c3c;
+    background-color: #d32f2f;
     color: white;
     border: none;
     border-radius: 4px;
