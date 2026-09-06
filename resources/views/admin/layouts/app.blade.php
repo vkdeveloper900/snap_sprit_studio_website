@@ -15,15 +15,19 @@
     @yield('style')
 </head>
 <body class="admin-body">
-    <div class="admin-container">
-        @include('admin.components.sidebar')
+    <div class="container-fluid">
+        <div class="row g-0" style="min-height: 100vh;">
+            <div class="col-md-2 p-0">
+                @include('admin.components.sidebar')
+            </div>
 
-        <div class="admin-content">
-            @include('admin.components.header')
+            <div class="col-md-10 p-0 d-flex flex-column">
+                @include('admin.components.header')
 
-            <main class="admin-main">
-                @yield('content')
-            </main>
+                <main class="admin-main flex-grow-1">
+                    @yield('content')
+                </main>
+            </div>
         </div>
     </div>
 
