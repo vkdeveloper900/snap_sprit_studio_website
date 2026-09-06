@@ -7,13 +7,13 @@
         </button>
 
         <ul class="navbar-menu">
-            <li><a href="#work">WORK</a></li>
-            <li><a href="#services">SERVICES</a></li>
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#team">TEAM</a></li>
-            <li><a href="#contact">CONTACT</a></li>
+            <li><a href="{{ route('about') }}">ABOUT</a></li>
+            <li><a href="{{ route('services') }}">SERVICES</a></li>
+            <li><a href="{{ route('portfolio') }}">WORK</a></li>
+            <li><a href="{{ route('team') }}">TEAM</a></li>
+            <li><a href="{{ route('contact') }}">CONTACT</a></li>
             <li class="navbar-cta">
-                <a href="#contact" class="btn btn-outline btn-small">ENQUIRY NOW</a>
+                <a href="{{ route('contact') }}" class="btn btn-outline btn-small">ENQUIRY NOW</a>
             </li>
         </ul>
     </div>

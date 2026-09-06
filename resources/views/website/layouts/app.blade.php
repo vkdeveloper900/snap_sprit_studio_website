@@ -32,6 +32,11 @@
 
 @include('website.components.footer')
 
+<!-- WhatsApp Button -->
+<a href="https://wa.me/[PHONE_NUMBER]?text=Hello%20Snap%20Spirit%20Studio!" class="whatsapp-btn" title="Chat on WhatsApp" target="_blank" rel="noopener noreferrer">
+    <i class="bi bi-whatsapp"></i>
+</a>
+
 <!-- Go to Top Button -->
 <button id="goToTop" class="go-to-top" title="Go to top">
     <i class="bi bi-chevron-up"></i>

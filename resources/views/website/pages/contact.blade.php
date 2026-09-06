@@ -24,8 +24,8 @@
                             <span class="contact-label">STUDIO ADDRESS</span>
                             <div class="contact-value">
                                 Snap Spirit Studio<br>
-                                Shop 402, Asthamangal Complex,<br>
-                                Near Rajasthan Hospital,<br>
+                                8th Floor, 834 to 838 Krupal Pathsala,<br>
+                                Near Kheti Bank, Ashram Road,<br>
                                 Ahmedabad, Gujarat - 380005<br>
                                 India
                             </div>
@@ -34,21 +34,21 @@
                         <div class="contact-item">
                             <span class="contact-label">PHONE</span>
                             <div class="contact-value">
-                                <a href="tel:[PHONE_NUMBER]">[PHONE NUMBER]</a>
+                                <a href="tel:+918488888494">+91 8488888494</a>
                             </div>
                         </div>
 
                         <div class="contact-item">
                             <span class="contact-label">WHATSAPP</span>
                             <div class="contact-value">
-                                <a href="https://wa.me/[PHONE_NUMBER]?text=Hello%20Snap%20Spirit%20Studio!">[PHONE NUMBER]</a>
+                                <a href="https://wa.me/918488888494?text=Hello%20Snap%20Spirit%20Studio!">+91 8488888494</a>
                             </div>
                         </div>
 
                         <div class="contact-item">
                             <span class="contact-label">EMAIL</span>
                             <div class="contact-value">
-                                <a href="mailto:[EMAIL_ADDRESS]">[EMAIL ADDRESS]</a>
+                                <a href="mailto:snapstudio.gmail.com">snapstudio.gmail.com</a>
                             </div>
                         </div>
 

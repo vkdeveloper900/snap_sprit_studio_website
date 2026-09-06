@@ -18,12 +18,12 @@
             <div class="about-content" style="display: block;">
                 <div class="about-text">
                     <h2>Who We Are</h2>
-                    <p>Snap Spirit Studio is an Ahmedabad-based creative studio specializing in photography and cinematography. We create visual stories for weddings, brands, businesses, advertising agencies, and creative projects.</p>
+                    <p>Snap Spirit Studio is a premium photography and cinematography studio based in Ahmedabad, Gujarat. We specialize in creating compelling visual narratives for weddings, brands, businesses, advertising agencies, and creative projects throughout Ahmedabad and beyond.</p>
 
-                    <p>Our work spans across weddings, pre-weddings, events, corporate shoots, brand photography, fashion, interior design, real estate, and cinematic productions. We believe in the power of visual storytelling to connect, inspire, and transform.</p>
+                    <p>Since our inception, we have established ourselves as one of Ahmedabad's leading photography studios, known for combining technical excellence with artistic vision. Our comprehensive services span wedding photography, pre-wedding shoots, corporate events, brand photography, fashion shoots, interior design documentation, real estate photography, and cinematic video productions. We believe in the power of authentic visual storytelling to connect, inspire, and create lasting impressions.</p>
 
                     <h3 style="margin-top: 2rem; font-size: 1.8rem;">Our Founder</h3>
-                    <p><strong>Chintan Mali</strong> is a cinematographer and visual storyteller with a deep passion for capturing authentic moments and bringing creative visions to life. With expertise in both photography and cinematography, Chintan leads the studio with a commitment to artistic excellence and technical mastery.</p>
+                    <p><strong>Chintan Mali</strong>, a renowned cinematographer and visual storyteller based in Ahmedabad, founded Snap Spirit Studio with a passion for capturing authentic emotions and bringing creative visions to life. With extensive expertise in both professional photography and cinematography, Chintan leads the studio with an unwavering commitment to artistic excellence, technical mastery, and client satisfaction. His work has been recognized across Ahmedabad's creative community for its distinctive style and storytelling approach.</p>
 
                     <h3 style="margin-top: 2rem; font-size: 1.8rem;">Our Philosophy</h3>
                     <p>We believe that every moment tells a story. Our approach is rooted in:</p>

@@ -1782,11 +1782,16 @@ section.services#services .services-grid {
    ================================================ */
 
 .final-cta {
-    background: linear-gradient(135deg, rgba(11, 11, 11, 0.4) 0%, rgba(11, 11, 11, 0.6) 100%),
+    background: linear-gradient(135deg, rgba(11, 11, 11, 0.45) 0%, rgba(11, 11, 11, 0.65) 100%),
     url('https://images.unsplash.com/photo-1606216174052-cc2cbe47d66d?w=1200&q=80') center/cover;
     color: var(--color-white);
     text-align: center;
-    padding: var(--spacing-2xl) var(--spacing-xl);
+    padding: 5rem var(--spacing-xl);
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .final-cta::before {
@@ -1800,28 +1805,62 @@ section.services#services .services-grid {
 .final-cta-content {
     position: relative;
     z-index: 1;
-    max-width: 700px;
+    max-width: 750px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1.5rem;
+    animation: fadeInUp 1s ease 0.3s both;
 }
 
 .final-cta h2 {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
     margin-bottom: 0;
-    line-height: 1.05;
+    line-height: 1.15;
+    letter-spacing: -0.8px;
 }
 
 .final-cta p {
-    font-size: 1.2rem;
-    margin-bottom: 0;
-    opacity: 0.9;
-    line-height: 1.6;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    margin-bottom: 1rem;
+    opacity: 0.92;
+    line-height: 1.8;
+    font-weight: 300;
 }
 
 .final-cta .btn {
-    margin: 0 var(--spacing-md);
+    border-radius: 30px;
+    padding: 0.9rem 2.2rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    transition: all 0.3s ease;
+}
+
+.final-cta .btn-primary {
+    background-color: var(--color-champagne);
+    border-color: var(--color-champagne);
+    color: var(--color-black);
+    box-shadow: 0 8px 25px rgba(184, 160, 122, 0.35);
+}
+
+.final-cta .btn-primary:hover {
+    background-color: var(--color-white);
+    border-color: var(--color-white);
+    box-shadow: 0 12px 35px rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+.final-cta .btn-outline {
+    border: 2px solid var(--color-white);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.final-cta .btn-outline:hover {
+    background-color: var(--color-white);
+    border-color: var(--color-white);
+    color: var(--color-black);
+    box-shadow: 0 12px 35px rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
 }
 
 /* ================================================
@@ -1863,11 +1902,18 @@ section.services#services .services-grid {
 
 .contact-item {
     margin-bottom: 0;
-    padding: 1rem 1.05rem;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 240, 232, 0.92) 100%);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
-    box-shadow: 0 10px 22px rgba(11, 11, 11, 0.05);
+    padding: 1.3rem 1.2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid rgba(184, 160, 122, 0.25);
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(11, 11, 11, 0.06);
+    transition: all var(--transition-base);
+}
+
+.contact-item:hover {
+    border-color: rgba(184, 160, 122, 0.45);
+    box-shadow: 0 12px 32px rgba(11, 11, 11, 0.1);
+    transform: translateY(-2px);
 }
 
 .contact-item:first-child {
@@ -1876,22 +1922,29 @@ section.services#services .services-grid {
 
 .contact-label {
     font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-gray);
-    margin-bottom: 0.45rem;
+    letter-spacing: 1.2px;
+    color: var(--color-champagne);
+    margin-bottom: 0.6rem;
     display: block;
+    font-weight: 600;
 }
 
 .contact-value {
-    font-size: 0.98rem;
+    font-size: 1rem;
     color: var(--color-black);
     line-height: 1.7;
+    font-weight: 500;
 }
 
 .contact-value a {
     color: var(--color-champagne);
+    transition: color var(--transition-base);
+}
+
+.contact-value a:hover {
+    color: var(--color-black);
 }
 
 .contact-form {
@@ -2249,6 +2302,39 @@ footer {
 
 .modal-next {
     right: 20px;
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(11, 11, 11, 0.9);
+    border: 1.5px solid #25D366;
+    color: #25D366;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.whatsapp-btn:hover {
+    background-color: #25D366;
+    color: var(--color-white);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-btn:active {
+    transform: translateY(-1px);
 }
 
 /* Go to Top Button */

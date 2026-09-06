@@ -12,10 +12,10 @@
         </video>
 
         <div class="hero-content">
-            <h1>Every Frame<br>Tells a<br>Story.</h1>
+            <h1>Premium Photography<br>& Cinematography<br>in Ahmedabad</h1>
             <p class="hero-description">
-                Cinematic photography & videography that captures raw emotions<br>
-                • Weddings • Events • Brands • Creative Visions
+                Award-winning visual storytelling for weddings, events, and brands<br>
+                Professional • Cinematic • Authentic
             </p>
         </div>
 
@@ -30,14 +30,11 @@
         <div class="container-max">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>We Capture More<br>Than Moments.<br>We Capture Stories.</h2>
-                    <p>Snap Spirit Studio is an Ahmedabad-based photography and cinematography studio creating visual stories for weddings, brands, businesses, agencies and creative projects.</p>
+                    <h2>We Capture More Than Moments. We Capture Stories.</h2>
 
-                    <div class="about-founder">
-                        <strong>Founded by Chintan Mali</strong>, a cinematographer and visual storyteller passionate about capturing authentic moments and bringing creative visions to life.
-                    </div>
+                    <p>Based in Ahmedabad, Snap Spirit Studio specializes in creating compelling visual narratives for weddings, brands, and creative projects. With expertise in both photography and cinematography, we transform your vision into timeless imagery.</p>
 
-                    <p>From intimate ceremonies to grand celebrations, from brand campaigns to creative productions, we bring technical excellence, artistic vision, and an unwavering commitment to your story.</p>
+                    <p><strong style="color: var(--color-champagne);">Founded by Chintan Mali</strong>, our studio brings technical excellence and artistic vision to every project. Whether it's an intimate ceremony or a grand celebration, a brand campaign or commercial production, we deliver authentic storytelling with cinematic excellence.</p>
 
                     <a href="{{ route('about') }}" class="btn btn-primary">DISCOVER OUR STORY →</a>
                 </div>
@@ -49,125 +46,53 @@
         </div>
     </section>
 
-    <!-- FEATURED WORK SECTION -->
-    <section class="featured-work" id="work">
-        <div class="container-max">
-            <div class="section-header">
-                <h2>Selected Work</h2>
-                <p>A collection of stories, moments and ideas we've brought to life.</p>
-            </div>
-
-            <div class="work-grid">
-                <div class="work-item">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding Photography">
-                    <div class="work-overlay">
-                        <span class="work-category">WEDDING</span>
-                        <h3 class="work-title">The Grand Celebration</h3>
-                        <span class="work-link">VIEW STORY →</span>
-                    </div>
-                </div>
-
-                <div class="work-item">
-                    <img src="https://images.unsplash.com/photo-1511285541135-f46ad50edbc1?w=600&q=80" alt="Pre-Wedding Shoot">
-                    <div class="work-overlay">
-                        <span class="work-category">PRE-WEDDING</span>
-                        <h3 class="work-title">Love in Motion</h3>
-                        <span class="work-link">VIEW STORY →</span>
-                    </div>
-                </div>
-
-                <div class="work-item">
-                    <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=600&q=80" alt="Corporate Photography">
-                    <div class="work-overlay">
-                        <span class="work-category">COMMERCIAL</span>
-                        <h3 class="work-title">Brand Identity Campaign</h3>
-                        <span class="work-link">VIEW STORY →</span>
-                    </div>
-                </div>
-
-                <div class="work-item">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" alt="Fashion Photography">
-                    <div class="work-overlay">
-                        <span class="work-category">FASHION</span>
-                        <h3 class="work-title">Editorial Moments</h3>
-                        <span class="work-link">VIEW STORY →</span>
-                    </div>
-                </div>
-
-                <div class="work-item">
-                    <img src="https://images.unsplash.com/photo-1585147394579-a44c8f35ec51?w=600&q=80" alt="Event Photography">
-                    <div class="work-overlay">
-                        <span class="work-category">EVENTS</span>
-                        <h3 class="work-title">Moments That Matter</h3>
-                        <span class="work-link">VIEW STORY →</span>
-                    </div>
-                </div>
-
-                <div class="work-item">
-                    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Architecture Photography">
-                    <div class="work-overlay">
-                        <span class="work-category">ARCHITECTURE</span>
-                        <h3 class="work-title">Spaces & Design</h3>
-                        <span class="work-link">VIEW STORY →</span>
-                    </div>
-                </div>
-            </div>
-
-            <a href="{{ route('portfolio') }}" class="btn btn-secondary" style="display: block; margin: 3rem auto 0;">EXPLORE ALL WORK →</a>
-        </div>
-    </section>
-
     <!-- SERVICES SECTION -->
     <section class="services" id="services">
         <div class="container-max">
             <div class="section-header">
                 <h2>What We Create</h2>
-                <p>Comprehensive visual services for every project type and vision.</p>
+                <p>Professional photography and cinematography services tailored for every vision and moment.</p>
             </div>
 
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-number">01</div>
                     <h3>Weddings & Events</h3>
+                    <p>Capture love, joy and celebration with timeless imagery</p>
                     <ul>
                         <li>Wedding Photography</li>
-                        <li>Wedding Cinematography</li>
                         <li>Pre-Wedding Shoots</li>
-                        <li>Ceremony Photography</li>
+                        <li>Wedding Cinematography</li>
                         <li>Event Coverage</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-number">02</div>
-                    <h3>Commercial & Corporate</h3>
+                    <h3>Commercial & Brand</h3>
+                    <p>Elevate your brand story with professional visual content</p>
                     <ul>
-                        <li>Corporate Shoots</li>
                         <li>Brand Photography</li>
+                        <li>Corporate Videos</li>
                         <li>Advertising Content</li>
                         <li>Promotional Materials</li>
-                        <li>Corporate Videos</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-number">03</div>
-                    <h3>Fashion & Models</h3>
+                    <h3>Fashion & Editorial</h3>
+                    <p>Create stunning visual narratives for models and designers</p>
                     <ul>
                         <li>Fashion Photography</li>
                         <li>Model Shoots</li>
                         <li>Editorial Content</li>
-                        <li>Fashion Videography</li>
                         <li>Portfolio Development</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-number">04</div>
                     <h3>Architecture & Real Estate</h3>
+                    <p>Showcase spaces with cinematic precision and beauty</p>
                     <ul>
                         <li>Interior Photography</li>
-                        <li>Interior Videography</li>
                         <li>Architectural Shoots</li>
                         <li>Real Estate Content</li>
                         <li>Virtual Tours</li>
@@ -175,14 +100,13 @@
                 </div>
 
                 <div class="service-card">
-                    <div class="service-number">05</div>
                     <h3>Content & Production</h3>
+                    <p>Create engaging content for every platform and audience</p>
                     <ul>
                         <li>Social Media Content</li>
                         <li>Reels & Short-Form</li>
                         <li>Documentary Films</li>
                         <li>Cinematic Production</li>
-                        <li>Creative Projects</li>
                     </ul>
                 </div>
             </div>
@@ -691,46 +615,6 @@
         <button class="modal-nav modal-next">&gt;</button>
     </div>
 
-    <!-- INSTAGRAM SECTION -->
-    <section class="instagram">
-        <div class="container-max">
-            <h2>Follow The Stories</h2>
-            <p class="instagram-handle">@snapspiritstudio</p>
-
-            <div class="instagram-grid">
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=300&q=80" alt="Instagram Post">
-                </div>
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1511285541135-f46ad50edbc1?w=300&q=80" alt="Instagram Post">
-                </div>
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=300&q=80" alt="Instagram Post">
-                </div>
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&q=80" alt="Instagram Post">
-                </div>
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1585147394579-a44c8f35ec51?w=300&q=80" alt="Instagram Post">
-                </div>
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=300&q=80" alt="Instagram Post">
-                </div>
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=300&q=80" alt="Instagram Post">
-                </div>
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&q=80" alt="Instagram Post">
-                </div>
-                <div class="instagram-item">
-                    <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=300&q=80" alt="Instagram Post">
-                </div>
-            </div>
-
-            <a href="https://instagram.com/snapspiritstudio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">FOLLOW ON INSTAGRAM →</a>
-        </div>
-    </section>
-
     <!-- FAQ SECTION -->
     <section class="faq">
         <div class="container-max">
@@ -867,8 +751,8 @@
                             <span class="contact-label">STUDIO</span>
                             <div class="contact-value">
                                 Snap Spirit Studio<br>
-                                Shop 402, Asthamangal Complex,<br>
-                                Near Rajasthan Hospital,<br>
+                                8th Floor, 834 to 838 Krupal Pathsala,<br>
+                                Near Kheti Bank, Ashram Road,<br>
                                 Ahmedabad, Gujarat - 380005
                             </div>
                         </div>
@@ -876,28 +760,14 @@
                         <div class="contact-item">
                             <span class="contact-label">PHONE</span>
                             <div class="contact-value">
-                                <a href="tel:[PHONE_NUMBER]">[PHONE NUMBER]</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <span class="contact-label">WHATSAPP</span>
-                            <div class="contact-value">
-                                <a href="https://wa.me/[PHONE_NUMBER]?text=Hello%20Snap%20Spirit%20Studio!">[PHONE NUMBER]</a>
+                                <a href="tel:+918488888494">+91 8488888494</a>
                             </div>
                         </div>
 
                         <div class="contact-item">
                             <span class="contact-label">EMAIL</span>
                             <div class="contact-value">
-                                <a href="mailto:[EMAIL_ADDRESS]">[EMAIL ADDRESS]</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <span class="contact-label">INSTAGRAM</span>
-                            <div class="contact-value">
-                                <a href="https://instagram.com/snapspiritstudio" target="_blank" rel="noopener noreferrer">@snapspiritstudio</a>
+                                <a href="mailto:snapstudio.gmail.com">snapstudio.gmail.com</a>
                             </div>
                         </div>
                     </div>
@@ -954,7 +824,7 @@
                         <div class="form-error"></div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">SEND ENQUIRY →</button>
+                    <button type="submit" class="btn btn-secondary" style="border: 2px solid var(--color-black); border-radius: 20px;">SEND ENQUIRY →</button>
                 </form>
             </div>
         </div>
