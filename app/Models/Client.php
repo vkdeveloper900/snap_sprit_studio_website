@@ -5,23 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class TeamMember extends Model
+class Client extends Model
 {
-    protected $table = 'team_members';
+    protected $table = 'clients';
 
     protected $fillable = [
         'name',
-        'designation',
-        'bio',
-        'email',
-        'phone',
-        'avatar',
-        'linkedin_url',
-        'twitter_url',
-        'instagram_url',
-        'portfolio_url',
+        'logo',
+        'category',
         'order',
         'is_active',
+        'url',
     ];
 
     protected $casts = [
@@ -29,12 +23,12 @@ class TeamMember extends Model
         'order' => 'integer',
     ];
 
-    protected $appends = ['avatar_url'];
+    protected $appends = ['logo_url'];
 
-    public function getAvatarUrlAttribute(): string
+    public function getLogoUrlAttribute(): string
     {
-        return $this->avatar
-            ? Storage::disk('team')->url($this->avatar)
+        return $this->logo
+            ? Storage::disk('clients')->url($this->logo)
             : 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&background=random&size=128';
     }
 

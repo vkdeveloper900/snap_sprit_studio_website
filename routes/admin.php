@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\FAQController;
@@ -53,6 +54,18 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/{id}/edit', [TeamController::class, 'edit'])->name('edit');
         Route::put('/{id}', [TeamController::class, 'update'])->name('update');
         Route::delete('/{id}', [TeamController::class, 'destroy'])->name('destroy');
+        Route::post('/reorder', [TeamController::class, 'reorder'])->name('reorder');
+    });
+
+    // Clients Management
+    Route::prefix('clients')->name('admin.clients.')->group(function () {
+        Route::get('/', [ClientController::class, 'index'])->name('index');
+        Route::get('/create', [ClientController::class, 'create'])->name('create');
+        Route::post('/', [ClientController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [ClientController::class, 'update'])->name('update');
+        Route::delete('/{id}', [ClientController::class, 'destroy'])->name('destroy');
+        Route::post('/reorder', [ClientController::class, 'reorder'])->name('reorder');
     });
 
     // Testimonials Management
@@ -63,6 +76,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/{id}/edit', [TestimonialController::class, 'edit'])->name('edit');
         Route::put('/{id}', [TestimonialController::class, 'update'])->name('update');
         Route::delete('/{id}', [TestimonialController::class, 'destroy'])->name('destroy');
+        Route::post('/reorder', [TestimonialController::class, 'reorder'])->name('reorder');
     });
 
     // Enquiries Management

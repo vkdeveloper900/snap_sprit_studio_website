@@ -16,12 +16,10 @@
 </head>
 <body class="admin-body">
     <div class="container-fluid">
-        <div class="row g-0" style="min-height: 100vh;">
-            <div class="col-md-2 p-0">
-                @include('admin.components.sidebar')
-            </div>
+        <div class="row g-0" style="min-height: 100vh; margin-left: 16.666%;">
+            @include('admin.components.sidebar')
 
-            <div class="col-md-10 p-0 d-flex flex-column">
+            <div class="col p-0 d-flex flex-column" style="width: 100%;">
                 @include('admin.components.header')
 
                 <main class="admin-main flex-grow-1">

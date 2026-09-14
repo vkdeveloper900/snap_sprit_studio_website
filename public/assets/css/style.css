@@ -1126,11 +1126,11 @@ section.services#services .services-grid {
 }
 
 .team-track {
-    animation: marquee-left 28s linear infinite;
+    animation: marquee-left 45s linear infinite;
 }
 
 .clients-track {
-    animation: marquee-left 34s linear infinite;
+    animation: marquee-left 55s linear infinite;
 }
 
 .team-grid {
@@ -1417,7 +1417,7 @@ section.services#services .services-grid {
     gap: 1.25rem;
     width: max-content;
     will-change: transform;
-    animation: marquee-left 30s linear infinite;
+    animation: marquee-left 50s linear infinite;
 }
 
 .testimonial-card {

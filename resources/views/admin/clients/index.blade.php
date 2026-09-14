@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Testimonials Management')
+@section('title', 'Clients Management')
 
 @section('content')
 
@@ -13,8 +13,8 @@
 
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center p-2">
-            <h4 class="text-white">Testimonials</h4>
-            <a href="{{ route('admin.testimonials.create') }}" class="btn btn-sm btn-outline-danger">+ Add Testimonial</a>
+            <h4 class="text-white">Clients</h4>
+            <a href="{{ route('admin.clients.create') }}" class="btn btn-sm btn-outline-danger">+ Add Client</a>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -22,32 +22,37 @@
                     <thead>
                     <tr>
                         <th style="width: 50px; cursor: grab;">Sr.</th>
-                        <th style="width: 300px;">Client Name</th>
-                        <th style="width: 150px;">Role/Designation</th>
+                        <th style="width: 150px;">Logo</th>
+                        <th style="width: 200px;">Name</th>
+                        <th style="width: 150px;">Category</th>
                         <th style="width: 100px;">Order</th>
-                        <th style="width: 80px;">Approved</th>
+                        <th style="width: 80px;">Status</th>
                         <th style="width: 120px;">Actions</th>
                     </tr>
                     </thead>
-                    <tbody id="testimonials-table">
-                    @forelse($testimonials as $index => $testimonial)
-                        <tr draggable="true" data-id="{{ $testimonial->id }}" data-order="{{ $testimonial->order }}">
+                    <tbody id="clients-table">
+                    @forelse($clients as $index => $client)
+                        <tr draggable="true" data-id="{{ $client->id }}" data-order="{{ $client->order }}">
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $testimonial->client_name }}</td>
-                            <td>{{ $testimonial->designation ?? '-' }}</td>
-                            <td><strong>{{ $testimonial->order }}</strong></td>
+                            <td>
+                                <img src="{{ $client->logo_url }}" alt="{{ $client->name }}"
+                                     style="width: 40px; height: 40px; border-radius: 4px; object-fit: cover;">
+                            </td>
+                            <td>{{ $client->name }}</td>
+                            <td>{{ $client->category }}</td>
+                            <td><strong>{{ $client->order }}</strong></td>
                             <td>
                             <span
-                                style="padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; @if($testimonial->is_approved) background-color: rgba(74, 222, 128, 0.2); color: #4ade80; @else background-color: rgba(255, 69, 69, 0.2); color: #ff4545; @endif">
-                                {{ $testimonial->is_approved ? 'Yes' : 'No' }}
+                                style="padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; @if($client->is_active) background-color: rgba(74, 222, 128, 0.2); color: #4ade80; @else background-color: rgba(255, 69, 69, 0.2); color: #ff4545; @endif">
+                                {{ $client->is_active ? 'Active' : 'Inactive' }}
                             </span>
                             </td>
                             <td>
-                                <a href="{{ route('admin.testimonials.edit', $testimonial->id) }}" class="btn-edit"
+                                <a href="{{ route('admin.clients.edit', $client->id) }}" class="btn-edit"
                                    style="color: var(--accent-gold); text-decoration: none; font-weight: 500; font-size: 12px; padding: 4px 8px; display: inline-block;">Edit</a>
                                 <button type="button" class="btn-delete delete-btn"
-                                        data-url="{{ route('admin.testimonials.destroy', $testimonial->id) }}"
-                                        data-name="{{ $testimonial->client_name }}"
+                                        data-url="{{ route('admin.clients.destroy', $client->id) }}"
+                                        data-name="{{ $client->name }}"
                                         style="background: none; border: none; color: var(--accent-red); cursor: pointer; font-weight: 500; font-size: 12px; padding: 4px 8px; text-decoration: none;">
                                     Delete
                                 </button>
@@ -55,9 +60,9 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" style="text-align: center; padding: 32px; color: var(--text-secondary);">
-                                No testimonials found. <a href="{{ route('admin.testimonials.create') }}"
-                                                         style="color: var(--accent-gold); text-decoration: none;">Add
+                            <td colspan="7" style="text-align: center; padding: 32px; color: var(--text-secondary);">
+                                No clients found. <a href="{{ route('admin.clients.create') }}"
+                                                     style="color: var(--accent-gold); text-decoration: none;">Add
                                     the first one</a>
                             </td>
                         </tr>
@@ -69,7 +74,7 @@
         <div class="card-footer p-0">
             <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4">
-                {{ $testimonials->links('pagination::bootstrap-5') }}
+                {{ $clients->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div>
@@ -110,7 +115,7 @@
     });
 
     // Sortable - Drag and Drop for Reordering
-    const tableBody = document.getElementById('testimonials-table');
+    const tableBody = document.getElementById('clients-table');
 
     if (tableBody) {
         Sortable.create(tableBody, {
@@ -127,7 +132,7 @@
                 });
 
                 // Send update to server
-                fetch('{{ route("admin.testimonials.reorder") }}', {
+                fetch('{{ route("admin.clients.reorder") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -140,7 +145,7 @@
                     if (data.success) {
                         Swal.fire({
                             title: 'Success!',
-                            text: 'Testimonial order updated successfully.',
+                            text: 'Client order updated successfully.',
                             icon: 'success',
                             timer: 2000
                         });

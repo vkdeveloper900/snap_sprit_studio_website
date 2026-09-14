@@ -16,53 +16,17 @@
     <section class="team" style="padding: var(--spacing-3xl) var(--spacing-xl);">
         <div class="container-max">
             <div class="team-grid">
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Chintan Mali - Founder">
+                @forelse($teamMembers as $member)
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="{{ $member->avatar_url }}" alt="{{ $member->name }}">
+                        </div>
+                        <h3>{{ $member->name }}</h3>
+                        <p>{{ $member->designation }}</p>
                     </div>
-                    <h3>Chintan Mali</h3>
-                    <p>Founder & Cinematographer</p>
-                </div>
-
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80" alt="Team Member">
-                    </div>
-                    <h3>Team Member</h3>
-                    <p>Photographer</p>
-                </div>
-
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80" alt="Team Member">
-                    </div>
-                    <h3>Team Member</h3>
-                    <p>Cinematographer</p>
-                </div>
-
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" alt="Team Member">
-                    </div>
-                    <h3>Team Member</h3>
-                    <p>Video Editor</p>
-                </div>
-
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Team Member">
-                    </div>
-                    <h3>Team Member</h3>
-                    <p>Creative Director</p>
-                </div>
-
-                <div class="team-member">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80" alt="Team Member">
-                    </div>
-                    <h3>Team Member</h3>
-                    <p>Photographer</p>
-                </div>
+                @empty
+                    <p style="text-align: center; grid-column: 1 / -1;">No team members found</p>
+                @endforelse
             </div>
         </div>
     </section>

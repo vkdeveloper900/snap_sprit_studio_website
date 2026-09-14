@@ -60,6 +60,33 @@ return [
             'report' => false,
         ],
 
+        'team' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/team'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage/team',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'clients' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/clients'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage/clients',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'testimonials' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/testimonials'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage/testimonials',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*

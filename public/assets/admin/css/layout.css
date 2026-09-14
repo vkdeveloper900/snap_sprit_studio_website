@@ -24,6 +24,11 @@ body.admin-body {
     overflow-y: auto;
     box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
     padding: 24px 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 16.666%;
+    z-index: 1040;
 }
 
 .sidebar-header {
@@ -68,12 +73,13 @@ body.admin-body {
 /* Admin Header */
 .admin-header {
     background-color: #1a1f2e;
-    padding: 16px 24px;
+    padding: 10px 24px;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 56px;
 }
 
 .hamburger-menu {
@@ -104,15 +110,31 @@ body.admin-body {
     gap: 16px;
 }
 
-.user-profile {
+.user-profile-dropdown {
+    position: relative;
+}
+
+.user-profile-btn {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    height: 36px;
+}
+
+.user-profile-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .user-avatar {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff4545, #ff7a7a);
     display: flex;
@@ -120,42 +142,101 @@ body.admin-body {
     justify-content: center;
     color: white;
     font-weight: 600;
-    font-size: 16px;
-}
-
-.user-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    font-size: 12px;
+    flex-shrink: 0;
 }
 
 .user-name {
     color: var(--text-primary);
     font-weight: 500;
-    font-size: 13px;
+    font-size: 12px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.btn-logout {
-    padding: 5px 12px;
-    background-color: transparent;
+.dropdown-arrow {
     color: var(--text-secondary);
-    border: 1px solid var(--text-secondary);
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
-.btn-logout:hover {
-    background-color: var(--accent-red);
-    color: white;
-    border-color: var(--accent-red);
+.user-profile-btn:hover .dropdown-arrow {
+    color: var(--text-primary);
+}
+
+.user-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background-color: #1a1f2e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.user-dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-item svg {
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.dropdown-item:hover svg {
+    color: var(--accent-gold);
+}
+
+.dropdown-item.logout-item:hover {
+    background-color: rgba(255, 69, 69, 0.1);
+}
+
+.dropdown-item.logout-item:hover svg {
+    color: var(--accent-red);
+}
+
+.dropdown-form {
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 /* Admin Main Content */
 .admin-main {
-    padding: 32px;
+    padding: 10px;
     background-color: var(--dark-bg);
     overflow-y: auto;
 }
@@ -280,31 +361,119 @@ body.admin-body {
 
 /* Tables */
 .table {
-    background-color: rgba(26, 35, 50, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    background-color: rgba(26, 31, 46, 0.5) !important;
+    border: none !important;
+    border-radius: 0;
+    margin-bottom: 0;
+    color: var(--text-primary) !important;
 }
 
 .table thead {
-    background-color: rgba(44, 62, 80, 0.4);
-    color: var(--text-secondary);
+    background-color: rgba(44, 62, 80, 0.5) !important;
+    color: var(--text-secondary) !important;
+}
+
+.table thead th {
+    background-color: rgba(44, 62, 80, 0.5) !important;
+    color: var(--text-secondary) !important;
 }
 
 .table th {
-    padding: 16px;
+    padding: 12px 16px;
     font-weight: 600;
     font-size: 13px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-secondary) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: rgba(44, 62, 80, 0.5) !important;
+}
+
+.table tbody {
+    background-color: rgba(26, 31, 46, 0.5) !important;
+}
+
+.table tbody td {
+    background-color: rgba(26, 31, 46, 0.5) !important;
+    color: var(--text-primary) !important;
 }
 
 .table td {
-    padding: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-primary) !important;
+    vertical-align: middle;
+    background-color: rgba(26, 31, 46, 0.5) !important;
+}
+
+.table tbody tr {
+    background-color: rgba(26, 31, 46, 0.5) !important;
 }
 
 .table tbody tr:hover {
-    background-color: rgba(44, 62, 80, 0.3);
+    background-color: rgba(44, 62, 80, 0.5) !important;
+}
+
+.table-sm tbody tr:hover {
+    background-color: rgba(44, 62, 80, 0.5) !important;
+}
+
+/* Pagination */
+.pagination {
+    --bs-pagination-bg: transparent;
+    --bs-pagination-border-color: rgba(255, 255, 255, 0.1);
+    --bs-pagination-color: var(--text-primary);
+    --bs-pagination-hover-bg: rgba(44, 62, 80, 0.8);
+    --bs-pagination-hover-color: var(--accent-gold);
+    --bs-pagination-hover-border-color: var(--accent-gold);
+    --bs-pagination-active-bg: var(--accent-gold);
+    --bs-pagination-active-border-color: var(--accent-gold);
+    --bs-pagination-active-color: #000;
+    --bs-pagination-disabled-color: var(--text-secondary);
+    --bs-pagination-disabled-bg: rgba(26, 31, 46, 0.5);
+    --bs-pagination-disabled-border-color: rgba(255, 255, 255, 0.05);
+}
+
+.pagination .page-link {
+    background-color: rgba(26, 31, 46, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(44, 62, 80, 0.8) !important;
+    color: var(--accent-gold) !important;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--accent-gold) !important;
+    border-color: var(--accent-gold) !important;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: rgba(26, 31, 46, 0.5) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Pagination Info Text */
+nav[aria-label="Page navigation"] {
+    color: var(--text-primary) !important;
+}
+
+nav[aria-label="Page navigation"] span {
+    color: var(--text-primary) !important;
+}
+
+nav[aria-label="Page navigation"] b {
+    color: var(--text-primary) !important;
+}
+
+.d-flex.justify-content-center {
+    color: var(--text-primary) !important;
+}
+
+.d-flex.justify-content-center * {
+    color: var(--text-primary) !important;
 }
 
 /* Forms */
@@ -312,31 +481,51 @@ body.admin-body {
     margin-bottom: 24px;
 }
 
-.form-group label {
+.form-group label,
+.form-label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
     font-size: 14px;
 }
 
 .form-group input,
 .form-group textarea,
-.form-group select {
+.form-group select,
+.form-control,
+.form-control:focus,
+textarea.form-control,
+textarea.form-control:focus {
     width: 100%;
     padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 6px;
-    background-color: rgba(26, 35, 50, 0.5);
-    color: var(--text-primary);
+    background-color: rgba(26, 35, 50, 0.5) !important;
+    color: var(--text-primary) !important;
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
     transition: all 0.3s ease;
 }
 
+.form-control::placeholder {
+    color: rgba(176, 184, 193, 0.6);
+}
+
+.form-control:focus {
+    border-color: var(--accent-gold) !important;
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15) !important;
+}
+
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: var(--text-secondary);
+}
+
+.form-text,
+.form-check-label {
+    color: var(--text-secondary) !important;
+    font-size: 13px;
 }
 
 .form-group input:focus,
@@ -349,13 +538,27 @@ body.admin-body {
 
 /* Cards */
 .card {
-    background-color: rgba(26, 35, 50, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(26, 31, 46, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .card-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(20, 24, 38, 0.9);
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px 8px 0 0;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-header h2,
+.card-header h3 {
+    margin: 0;
+    color: var(--text-primary);
 }
 
 /* Responsive */
@@ -395,7 +598,8 @@ body.admin-body {
 
 @media (max-width: 576px) {
     .admin-header {
-        padding: 12px 16px;
+        padding: 8px 16px;
+        height: 50px;
     }
 
     .admin-main {
@@ -403,13 +607,14 @@ body.admin-body {
     }
 
     .user-avatar {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
     }
 
     .user-name {
-        font-size: 12px;
+        font-size: 11px;
+        display: none;
     }
 
     .clock-display {
