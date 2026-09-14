@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
+use App\Models\Enquiry;
+use App\Models\TeamMember;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -29,7 +32,8 @@ class PageController extends Controller
 
     public function team()
     {
-        return view('website.pages.team');
+        $teamMembers = TeamMember::active()->ordered()->get();
+        return view('website.pages.team', compact('teamMembers'));
     }
 
     public function contact()
@@ -39,7 +43,28 @@ class PageController extends Controller
 
     public function submitContact(Request $request)
     {
-        // Handle contact form submission
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+            'service_interested' => 'required|string|max:255',
+            'subject' => 'nullable|date',
+            'message' => 'nullable|string',
+        ]);
+
+        $enquiry = Enquiry::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'service_interested' => $validated['service_interested'],
+            'subject' => $validated['subject'],
+            'message' => $validated['message'],
+            'status' => 'new',
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
+
+        return back()->with('success', 'Thank you! We received your enquiry. Our team will contact you within 24 hours.');
     }
 
     public function privacy()

@@ -3,6 +3,26 @@
 @section('title', 'Home')
 
 @section('content')
+
+@if(session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Thank You! 🎉',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonColor: '#d4af37',
+                confirmButtonText: 'Got it',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('home-contact-form').reset();
+                }
+            });
+        });
+    </script>
+@endif
     <!-- HERO SECTION -->
     <section class="hero" id="hero">
         <!-- Background Video -->
@@ -170,69 +190,28 @@
 
             <div class="team-marquee" aria-label="Team profiles marquee">
                 <div class="team-track">
-                    <div class="team-member marquee-card">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Chintan Mali - Founder">
+                    @forelse($teamMembers as $member)
+                        <div class="team-member marquee-card">
+                            <div class="team-image">
+                                <img src="{{ $member->avatar_url }}" alt="{{ $member->name }}">
+                            </div>
+                            <h3>{{ $member->name }}</h3>
+                            <p>{{ $member->designation }}</p>
                         </div>
-                        <h3>Chintan Mali</h3>
-                        <p>Founder & Cinematographer</p>
-                    </div>
+                    @empty
+                        <p>No team members found</p>
+                    @endforelse
 
-                    <div class="team-member marquee-card">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80" alt="Team Member">
+                    @forelse($teamMembers as $member)
+                        <div class="team-member marquee-card" aria-hidden="true">
+                            <div class="team-image">
+                                <img src="{{ $member->avatar_url }}" alt="">
+                            </div>
+                            <h3>{{ $member->name }}</h3>
+                            <p>{{ $member->designation }}</p>
                         </div>
-                        <h3>Team Member</h3>
-                        <p>Photographer</p>
-                    </div>
-
-                    <div class="team-member marquee-card">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80" alt="Team Member">
-                        </div>
-                        <h3>Team Member</h3>
-                        <p>Cinematographer</p>
-                    </div>
-
-                    <div class="team-member marquee-card">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" alt="Team Member">
-                        </div>
-                        <h3>Team Member</h3>
-                        <p>Video Editor</p>
-                    </div>
-
-                    <div class="team-member marquee-card" aria-hidden="true">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="">
-                        </div>
-                        <h3>Chintan Mali</h3>
-                        <p>Founder & Cinematographer</p>
-                    </div>
-
-                    <div class="team-member marquee-card" aria-hidden="true">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80" alt="">
-                        </div>
-                        <h3>Team Member</h3>
-                        <p>Photographer</p>
-                    </div>
-
-                    <div class="team-member marquee-card" aria-hidden="true">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80" alt="">
-                        </div>
-                        <h3>Team Member</h3>
-                        <p>Cinematographer</p>
-                    </div>
-
-                    <div class="team-member marquee-card" aria-hidden="true">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" alt="">
-                        </div>
-                        <h3>Team Member</h3>
-                        <p>Video Editor</p>
-                    </div>
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -248,133 +227,32 @@
 
             <div class="clients-marquee" aria-label="Brand collaborations marquee">
                 <div class="clients-track">
-                    <div class="client-logo marquee-card">
-                        <div class="client-icon"><i class="bi bi-camera-reels"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Aperture House</span>
-                            <span class="client-tag">Brand Films</span>
+                    @forelse($clients as $client)
+                        <div class="client-logo marquee-card">
+                            <div class="client-icon">
+                                <img src="{{ $client->logo_url }}" alt="{{ $client->name }}" style="width: 60px; height: 60px; object-fit: contain;">
+                            </div>
+                            <div class="client-copy">
+                                <span class="client-name">{{ $client->name }}</span>
+                                <span class="client-tag">{{ $client->category }}</span>
+                            </div>
                         </div>
-                    </div>
+                    @empty
+                        <p>No clients found</p>
+                    @endforelse
 
-                    <div class="client-logo marquee-card">
-                        <div class="client-icon"><i class="bi bi-stars"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Frame & Co.</span>
-                            <span class="client-tag">Creative Agency</span>
+                    @forelse($clients as $client)
+                        <div class="client-logo marquee-card" aria-hidden="true">
+                            <div class="client-icon">
+                                <img src="{{ $client->logo_url }}" alt="{{ $client->name }}" style="width: 60px; height: 60px; object-fit: contain;">
+                            </div>
+                            <div class="client-copy">
+                                <span class="client-name">{{ $client->name }}</span>
+                                <span class="client-tag">{{ $client->category }}</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="client-logo marquee-card">
-                        <div class="client-icon"><i class="bi bi-building"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Northline Studio</span>
-                            <span class="client-tag">Commercial Brand</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card">
-                        <div class="client-icon"><i class="bi bi-palette"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Bloom Atelier</span>
-                            <span class="client-tag">Fashion House</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card">
-                        <div class="client-icon"><i class="bi bi-award"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Prism Collective</span>
-                            <span class="client-tag">Design Studio</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card">
-                        <div class="client-icon"><i class="bi bi-bag-check"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Urban Craft</span>
-                            <span class="client-tag">Retail Brand</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card">
-                        <div class="client-icon"><i class="bi bi-play-circle"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Motion House</span>
-                            <span class="client-tag">Production Partner</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card">
-                        <div class="client-icon"><i class="bi bi-lightning-charge"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Atlas Media</span>
-                            <span class="client-tag">Agency Partner</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card" aria-hidden="true">
-                        <div class="client-icon"><i class="bi bi-camera-reels"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Aperture House</span>
-                            <span class="client-tag">Brand Films</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card" aria-hidden="true">
-                        <div class="client-icon"><i class="bi bi-stars"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Frame & Co.</span>
-                            <span class="client-tag">Creative Agency</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card" aria-hidden="true">
-                        <div class="client-icon"><i class="bi bi-building"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Northline Studio</span>
-                            <span class="client-tag">Commercial Brand</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card" aria-hidden="true">
-                        <div class="client-icon"><i class="bi bi-palette"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Bloom Atelier</span>
-                            <span class="client-tag">Fashion House</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card" aria-hidden="true">
-                        <div class="client-icon"><i class="bi bi-award"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Prism Collective</span>
-                            <span class="client-tag">Design Studio</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card" aria-hidden="true">
-                        <div class="client-icon"><i class="bi bi-bag-check"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Urban Craft</span>
-                            <span class="client-tag">Retail Brand</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card" aria-hidden="true">
-                        <div class="client-icon"><i class="bi bi-play-circle"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Motion House</span>
-                            <span class="client-tag">Production Partner</span>
-                        </div>
-                    </div>
-
-                    <div class="client-logo marquee-card" aria-hidden="true">
-                        <div class="client-icon"><i class="bi bi-lightning-charge"></i></div>
-                        <div class="client-copy">
-                            <span class="client-name">Atlas Media</span>
-                            <span class="client-tag">Agency Partner</span>
-                        </div>
-                    </div>
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -425,59 +303,37 @@
 
             <div class="testimonials-marquee" aria-label="Client testimonials slider">
                 <div class="testimonials-track">
-                    <div class="testimonial-card marquee-card">
-                        <div class="testimonial-quote">"</div>
-                        <p class="testimonial-text">"[PLACEHOLDER CLIENT TESTIMONIAL — REPLACE WITH REAL CLIENT REVIEW.]"</p>
-                        <div class="testimonial-footer">
-                            <div class="testimonial-author">Client Name</div>
-                            <div class="testimonial-role">Wedding Client</div>
+                    @forelse($testimonials as $testimonial)
+                        <div class="testimonial-card marquee-card">
+                            <div class="testimonial-quote">"</div>
+                            <p class="testimonial-text">"{{ $testimonial->testimonial_text }}"</p>
+                            <div class="testimonial-footer">
+                                <div class="testimonial-author">{{ $testimonial->client_name }}</div>
+                                <div class="testimonial-role">{{ $testimonial->designation }}</div>
+                            </div>
                         </div>
-                    </div>
+                    @empty
+                        <div class="testimonial-card marquee-card">
+                            <div class="testimonial-quote">"</div>
+                            <p class="testimonial-text">"No testimonials available."</p>
+                            <div class="testimonial-footer">
+                                <div class="testimonial-author">Coming Soon</div>
+                                <div class="testimonial-role">Client</div>
+                            </div>
+                        </div>
+                    @endforelse
 
-                    <div class="testimonial-card marquee-card">
-                        <div class="testimonial-quote">"</div>
-                        <p class="testimonial-text">"[PLACEHOLDER CLIENT TESTIMONIAL — REPLACE WITH REAL CLIENT REVIEW.]"</p>
-                        <div class="testimonial-footer">
-                            <div class="testimonial-author">Brand Name</div>
-                            <div class="testimonial-role">Commercial Client</div>
+                    @forelse($testimonials as $testimonial)
+                        <div class="testimonial-card marquee-card" aria-hidden="true">
+                            <div class="testimonial-quote">"</div>
+                            <p class="testimonial-text">"{{ $testimonial->testimonial_text }}"</p>
+                            <div class="testimonial-footer">
+                                <div class="testimonial-author">{{ $testimonial->client_name }}</div>
+                                <div class="testimonial-role">{{ $testimonial->designation }}</div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="testimonial-card marquee-card">
-                        <div class="testimonial-quote">"</div>
-                        <p class="testimonial-text">"[PLACEHOLDER CLIENT TESTIMONIAL — REPLACE WITH REAL CLIENT REVIEW.]"</p>
-                        <div class="testimonial-footer">
-                            <div class="testimonial-author">Agency Name</div>
-                            <div class="testimonial-role">Creative Agency</div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card marquee-card" aria-hidden="true">
-                        <div class="testimonial-quote">"</div>
-                        <p class="testimonial-text">"[PLACEHOLDER CLIENT TESTIMONIAL — REPLACE WITH REAL CLIENT REVIEW.]"</p>
-                        <div class="testimonial-footer">
-                            <div class="testimonial-author">Client Name</div>
-                            <div class="testimonial-role">Wedding Client</div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card marquee-card" aria-hidden="true">
-                        <div class="testimonial-quote">"</div>
-                        <p class="testimonial-text">"[PLACEHOLDER CLIENT TESTIMONIAL — REPLACE WITH REAL CLIENT REVIEW.]"</p>
-                        <div class="testimonial-footer">
-                            <div class="testimonial-author">Brand Name</div>
-                            <div class="testimonial-role">Commercial Client</div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card marquee-card" aria-hidden="true">
-                        <div class="testimonial-quote">"</div>
-                        <p class="testimonial-text">"[PLACEHOLDER CLIENT TESTIMONIAL — REPLACE WITH REAL CLIENT REVIEW.]"</p>
-                        <div class="testimonial-footer">
-                            <div class="testimonial-author">Agency Name</div>
-                            <div class="testimonial-role">Creative Agency</div>
-                        </div>
-                    </div>
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -733,7 +589,7 @@
 
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="#contact" class="btn btn-primary btn-large">START A PROJECT</a>
-                    <a href="https://wa.me/[PHONE_NUMBER]?text=Hello%20Snap%20Spirit%20Studio!" class="btn btn-outline btn-large">WHATSAPP US</a>
+                    <a href="https://wa.me/918488888494?text=Hello%20Snap%20Spirit%20Studio!" class="btn btn-outline btn-large">WHATSAPP US</a>
                 </div>
             </div>
         </div>
@@ -773,55 +629,55 @@
                     </div>
                 </div>
 
-                <form class="contact-form">
+                <form class="contact-form" method="POST" action="{{ route('contact.submit') }}" id="home-contact-form">
+                    @csrf
                     <div class="form-group">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Your name" required>
-                        <div class="form-error"></div>
+                        <label class="form-label">Name *</label>
+                        <input type="text" class="form-control" name="name" placeholder="Your name" required value="{{ old('name') }}">
+                        @error('name') <div class="form-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="your@email.com" required>
-                        <div class="form-error"></div>
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-control" name="email" placeholder="your@email.com" required value="{{ old('email') }}">
+                        @error('email') <div class="form-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Phone</label>
-                        <input type="tel" class="form-control" name="phone" placeholder="+91 9876543210">
-                        <div class="form-error"></div>
+                        <label class="form-label">Phone *</label>
+                        <input type="tel" class="form-control" name="phone" placeholder="+91 9876543210" required value="{{ old('phone') }}">
+                        @error('phone') <div class="form-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Project Type</label>
-                            <select class="form-control" name="project-type">
+                            <label class="form-label">Project Type *</label>
+                            <select class="form-control" name="service_interested" required>
                                 <option value="">Select project type</option>
-                                <option value="wedding">Wedding</option>
-                                <option value="prewedding">Pre-Wedding</option>
-                                <option value="event">Event</option>
-                                <option value="corporate">Corporate</option>
-                                <option value="commercial">Commercial</option>
-                                <option value="fashion">Fashion</option>
-                                <option value="realestate">Real Estate</option>
-                                <option value="interior">Interior</option>
-                                <option value="content">Content Creation</option>
-                                <option value="other">Other</option>
+                                <option value="Wedding" @if(old('service_interested') == 'Wedding') selected @endif>Wedding</option>
+                                <option value="Pre-Wedding" @if(old('service_interested') == 'Pre-Wedding') selected @endif>Pre-Wedding</option>
+                                <option value="Event" @if(old('service_interested') == 'Event') selected @endif>Event</option>
+                                <option value="Corporate" @if(old('service_interested') == 'Corporate') selected @endif>Corporate</option>
+                                <option value="Commercial / Brand" @if(old('service_interested') == 'Commercial / Brand') selected @endif>Commercial / Brand</option>
+                                <option value="Fashion" @if(old('service_interested') == 'Fashion') selected @endif>Fashion</option>
+                                <option value="Real Estate" @if(old('service_interested') == 'Real Estate') selected @endif>Real Estate</option>
+                                <option value="Interior Design" @if(old('service_interested') == 'Interior Design') selected @endif>Interior Design</option>
+                                <option value="Content Creation" @if(old('service_interested') == 'Content Creation') selected @endif>Content Creation</option>
+                                <option value="Other" @if(old('service_interested') == 'Other') selected @endif>Other</option>
                             </select>
-                            <div class="form-error"></div>
+                            @error('service_interested') <div class="form-error">{{ $message }}</div> @enderror
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Event / Project Date</label>
-                            <input type="date" class="form-control" name="event-date">
-                            <div class="form-error"></div>
+                            <input type="date" class="form-control" name="subject" value="{{ old('subject') }}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Message</label>
-                        <textarea class="form-control" name="message" placeholder="Tell us about your project..."></textarea>
-                        <div class="form-error"></div>
+                        <textarea class="form-control" name="message" placeholder="Tell us about your project...">{{ old('message') }}</textarea>
+                        @error('message') <div class="form-error">{{ $message }}</div> @enderror
                     </div>
 
                     <button type="submit" class="btn btn-secondary" style="border: 2px solid var(--color-black); border-radius: 20px;">SEND ENQUIRY →</button>

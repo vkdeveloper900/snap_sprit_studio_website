@@ -3,6 +3,27 @@
 @section('title', 'Contact')
 
 @section('content')
+
+@if(session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Thank You! 🎉',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonColor: '#d4af37',
+                confirmButtonText: 'Got it',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Scroll to form
+                    document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+@endif
     <!-- PAGE HERO -->
     <section class="hero" id="hero" style="min-height: 50vh; height: auto; padding: 8rem 2rem;">
         <div class="hero-content">
@@ -15,7 +36,7 @@
     <!-- CONTACT SECTION -->
     <section class="contact">
         <div class="container-max">
-            <div class="contact-container">
+            <div class="contact-container" id="contact-form">
                 <div class="contact-info">
                     <h2>Let's Talk About<br>Your Next Story.</h2>
 
@@ -69,55 +90,55 @@
                     </div>
                 </div>
 
-                <form class="contact-form">
+                <form class="contact-form" method="POST" action="{{ route('contact.submit') }}">
+                    @csrf
                     <div class="form-group">
                         <label class="form-label">Name *</label>
-                        <input type="text" class="form-control" name="name" placeholder="Your full name" required>
-                        <div class="form-error"></div>
+                        <input type="text" class="form-control" name="name" placeholder="Your full name" required value="{{ old('name') }}">
+                        @error('name') <div class="form-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Email *</label>
-                        <input type="email" class="form-control" name="email" placeholder="your@email.com" required>
-                        <div class="form-error"></div>
+                        <input type="email" class="form-control" name="email" placeholder="your@email.com" required value="{{ old('email') }}">
+                        @error('email') <div class="form-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Phone *</label>
-                        <input type="tel" class="form-control" name="phone" placeholder="+91 9876543210" required>
-                        <div class="form-error"></div>
+                        <input type="tel" class="form-control" name="phone" placeholder="+91 9876543210" required value="{{ old('phone') }}">
+                        @error('phone') <div class="form-error">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Project Type *</label>
-                            <select class="form-control" name="project-type" required>
+                            <select class="form-control" name="service_interested" required>
                                 <option value="">-- Select project type --</option>
-                                <option value="wedding">Wedding</option>
-                                <option value="prewedding">Pre-Wedding</option>
-                                <option value="event">Event</option>
-                                <option value="corporate">Corporate</option>
-                                <option value="commercial">Commercial / Brand</option>
-                                <option value="fashion">Fashion</option>
-                                <option value="realestate">Real Estate</option>
-                                <option value="interior">Interior Design</option>
-                                <option value="content">Content Creation</option>
-                                <option value="other">Other</option>
+                                <option value="Wedding" @if(old('service_interested') == 'Wedding') selected @endif>Wedding</option>
+                                <option value="Pre-Wedding" @if(old('service_interested') == 'Pre-Wedding') selected @endif>Pre-Wedding</option>
+                                <option value="Event" @if(old('service_interested') == 'Event') selected @endif>Event</option>
+                                <option value="Corporate" @if(old('service_interested') == 'Corporate') selected @endif>Corporate</option>
+                                <option value="Commercial / Brand" @if(old('service_interested') == 'Commercial / Brand') selected @endif>Commercial / Brand</option>
+                                <option value="Fashion" @if(old('service_interested') == 'Fashion') selected @endif>Fashion</option>
+                                <option value="Real Estate" @if(old('service_interested') == 'Real Estate') selected @endif>Real Estate</option>
+                                <option value="Interior Design" @if(old('service_interested') == 'Interior Design') selected @endif>Interior Design</option>
+                                <option value="Content Creation" @if(old('service_interested') == 'Content Creation') selected @endif>Content Creation</option>
+                                <option value="Other" @if(old('service_interested') == 'Other') selected @endif>Other</option>
                             </select>
-                            <div class="form-error"></div>
+                            @error('service_interested') <div class="form-error">{{ $message }}</div> @enderror
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Event / Project Date</label>
-                            <input type="date" class="form-control" name="event-date">
-                            <div class="form-error"></div>
+                            <input type="date" class="form-control" name="subject" value="{{ old('subject') }}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Message</label>
-                        <textarea class="form-control" name="message" placeholder="Tell us about your project, vision, and any specific requirements..."></textarea>
-                        <div class="form-error"></div>
+                        <textarea class="form-control" name="message" placeholder="Tell us about your project, vision, and any specific requirements...">{{ old('message') }}</textarea>
+                        @error('message') <div class="form-error">{{ $message }}</div> @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary">SEND ENQUIRY →</button>
@@ -215,7 +236,7 @@
                 <p>Send us your project details or reach out directly via WhatsApp.</p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="#contact" class="btn btn-primary btn-large">FILL THE FORM ABOVE</a>
-                    <a href="https://wa.me/[PHONE_NUMBER]?text=Hello%20Snap%20Spirit%20Studio!" class="btn btn-outline btn-large">WHATSAPP NOW</a>
+                    <a href="https://wa.me/918488888494?text=Hello%20Snap%20Spirit%20Studio!" class="btn btn-outline btn-large">WHATSAPP NOW</a>
                 </div>
             </div>
         </div>
