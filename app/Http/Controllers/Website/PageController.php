@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Enquiry;
+use App\Models\FAQ;
+use App\Models\Highlight;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
 
@@ -38,7 +40,8 @@ class PageController extends Controller
 
     public function contact()
     {
-        return view('website.pages.contact');
+        $faqs = FAQ::active()->ordered()->get();
+        return view('website.pages.contact', compact('faqs'));
     }
 
     public function submitContact(Request $request)
@@ -75,5 +78,12 @@ class PageController extends Controller
     public function terms()
     {
         return view('website.pages.terms');
+    }
+
+    public function highlightShow(Highlight $highlight)
+    {
+        abort_if($highlight->status !== 'active', 404);
+        $highlight->load('activeMedias');
+        return view('website.pages.highlight-show', compact('highlight'));
     }
 }

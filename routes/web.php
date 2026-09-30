@@ -23,5 +23,8 @@ Route::post('/contact', [PageController::class, 'submitContact'])->name('contact
 Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 
+// Highlight detail — URL uses encrypted id via route model binding
+Route::get('/highlight/{highlight}', [PageController::class, 'highlightShow'])->name('highlight.show');
+
 // Admin Routes
 require __DIR__ . '/admin.php';

@@ -1,19 +1,23 @@
 <footer>
     <div class="footer-container">
         <div class="footer-brand">
-            <h3>SNAP SPIRIT STUDIO</h3>
-            <p>Photography & Cinematography for Weddings, Events, Brands & Creative Productions.</p>
-            <p style="font-size: 0.95rem; margin-top: 1rem; opacity: 0.85;">Based in Ahmedabad, Gujarat, we specialize in capturing cinematic stories through premium photography and videography.</p>
+            <h3>{{ strtoupper($company['company_name'] ?? 'SNAP SPIRIT STUDIO') }}</h3>
+            @if(!empty($company['tagline']))
+                <p>{{ $company['tagline'] }}</p>
+            @endif
+            @if(!empty($company['about_short']))
+                <p style="font-size: 0.95rem; margin-top: 1rem; opacity: 0.85;">{{ $company['about_short'] }}</p>
+            @endif
         </div>
 
         <div class="footer-section">
             <h4>NAVIGATION</h4>
             <ul>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="{{ route('portfolio') }}">Work</a></li>
+                <li><a href="{{ route('services') }}">Services</a></li>
+                <li><a href="{{ route('about') }}">About</a></li>
+                <li><a href="{{ route('team') }}">Team</a></li>
+                <li><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
         </div>
 
@@ -28,16 +32,39 @@
         <div class="footer-section">
             <h4>FOLLOW US</h4>
             <ul class="footer-socials">
-                <li><a href="https://instagram.com/snapspiritstudio" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a></li>
-                <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a></li>
-                <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-youtube"></i></a></li>
+                @if(!empty($company['instagram_url']))
+                    <li><a href="{{ $company['instagram_url'] }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a></li>
+                @endif
+                @if(!empty($company['facebook_url']))
+                    <li><a href="{{ $company['facebook_url'] }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a></li>
+                @endif
+                @if(!empty($company['youtube_url']))
+                    <li><a href="{{ $company['youtube_url'] }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-youtube"></i></a></li>
+                @endif
+                @if(!empty($company['linkedin_url']))
+                    <li><a href="{{ $company['linkedin_url'] }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a></li>
+                @endif
+                @if(!empty($company['twitter_url']))
+                    <li><a href="{{ $company['twitter_url'] }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a></li>
+                @endif
             </ul>
         </div>
     </div>
 
     <div class="footer-bottom">
-        <div>© 2026 Snap Spirit Studio. All Rights Reserved.</div>
-        <div>Developed by <a href="https://adoisstudio.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-champagne); text-decoration: none; font-weight: 500;">Adois Studio</a></div>
-        <div>Ahmedabad, Gujarat</div>
+        <div>{{ $company['copyright_text'] ?? ('© ' . date('Y') . ' Snap Spirit Studio. All Rights Reserved.') }}</div>
+        @if(!empty($company['developer_name']))
+            <div>
+                Developed by
+                @if(!empty($company['developer_url']))
+                    <a href="{{ $company['developer_url'] }}" target="_blank" rel="noopener noreferrer" style="color: var(--color-champagne); text-decoration: none; font-weight: 500;">{{ $company['developer_name'] }}</a>
+                @else
+                    <span style="color: var(--color-champagne); font-weight: 500;">{{ $company['developer_name'] }}</span>
+                @endif
+            </div>
+        @endif
+        @if(!empty($company['location_short']))
+            <div>{{ $company['location_short'] }}</div>
+        @endif
     </div>
 </footer>

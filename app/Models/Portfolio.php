@@ -31,6 +31,17 @@ class Portfolio extends Model
         'order' => 'integer',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (is_null($model->order)) {
+                $model->order = (static::max('order') ?? 0) + 1;
+            }
+        });
+    }
+
     public function media(): BelongsToMany
     {
         return $this->belongsToMany(Media::class, 'portfolio_media')

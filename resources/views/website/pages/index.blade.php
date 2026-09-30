@@ -134,6 +134,16 @@
     </section>
 
     <!-- WEDDINGS & PRE-WEDDINGS SECTION -->
+    @php
+        $weddingImages = $weddingHighlights
+            ->map(fn($h) => [
+                'src'   => $h->type === 'video' ? $h->thumbnail_full_url : $h->media_full_url,
+                'alt'   => $h->title,
+                'title' => $h->title,
+            ])
+            ->filter(fn($i) => !empty($i['src']))
+            ->values();
+    @endphp
     <section class="weddings">
         <div class="container-max">
             <div class="weddings-content">
@@ -143,21 +153,77 @@
                     <a href="{{ route('portfolio') }}" class="btn btn-primary">EXPLORE WEDDING STORIES →</a>
                 </div>
 
-                <div class="weddings-images">
-                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="Wedding Ceremony">
-                    <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&q=80" alt="Pre-Wedding Portrait">
+                <div class="weddings-images" id="wedding-images">
+                    @if($weddingImages->count() >= 1)
+                        <img src="{{ $weddingImages[0]['src'] }}" alt="{{ $weddingImages[0]['alt'] }}" data-slot="0" style="transition: opacity 0.6s ease;">
+                        <img src="{{ $weddingImages[1]['src'] ?? $weddingImages[0]['src'] }}" alt="{{ $weddingImages[1]['alt'] ?? $weddingImages[0]['alt'] }}" data-slot="1" style="transition: opacity 0.6s ease;">
+                    @else
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="Wedding Ceremony">
+                        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&q=80" alt="Pre-Wedding Portrait">
+                    @endif
                 </div>
             </div>
         </div>
     </section>
 
+    @if($weddingImages->count() > 2)
+        <script>
+        (function () {
+            const imgs = @json($weddingImages->values());
+            const container = document.getElementById('wedding-images');
+            if (!container) return;
+            const slots = container.querySelectorAll('img[data-slot]');
+            if (slots.length < 2) return;
+
+            let idx = 0;
+            const INTERVAL = 4000;
+            const FADE_MS  = 600;
+
+            function step() {
+                idx = (idx + 2) % imgs.length;
+                const a = imgs[idx];
+                const b = imgs[(idx + 1) % imgs.length];
+
+                slots[0].style.opacity = '0';
+                slots[1].style.opacity = '0';
+
+                setTimeout(() => {
+                    slots[0].src = a.src;
+                    slots[0].alt = a.alt;
+                    slots[1].src = b.src;
+                    slots[1].alt = b.alt;
+                    slots[0].style.opacity = '1';
+                    slots[1].style.opacity = '1';
+                }, FADE_MS);
+            }
+
+            setInterval(step, INTERVAL);
+        })();
+        </script>
+    @endif
+
     <!-- COMMERCIAL & BRAND WORK SECTION -->
+    @php
+        $commercialImages = $commercialHighlights
+            ->map(fn($h) => [
+                'src'   => $h->type === 'video' ? $h->thumbnail_full_url : $h->media_full_url,
+                'alt'   => $h->title,
+                'title' => $h->title,
+            ])
+            ->filter(fn($i) => !empty($i['src']))
+            ->values();
+    @endphp
     <section class="commercial">
         <div class="container-max">
             <div class="commercial-content">
-                <div class="commercial-images">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Brand Photography">
-                    <img src="https://images.unsplash.com/photo-1552168324-d7da38ad4789?w=600&q=80" alt="Commercial Shoot">
+                <div class="commercial-images" id="commercial-images">
+                    @if($commercialImages->count() >= 1)
+                        <img src="{{ $commercialImages[0]['src'] }}" alt="{{ $commercialImages[0]['alt'] }}" data-slot="0" style="transition: opacity 0.6s ease;">
+                        <img src="{{ $commercialImages[1]['src'] ?? $commercialImages[0]['src'] }}" alt="{{ $commercialImages[1]['alt'] ?? $commercialImages[0]['alt'] }}" data-slot="1" style="transition: opacity 0.6s ease;">
+                    @else
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Brand Photography">
+                        <img src="https://images.unsplash.com/photo-1552168324-d7da38ad4789?w=600&q=80" alt="Commercial Shoot">
+                    @endif
                 </div>
 
                 <div class="commercial-text">
@@ -168,6 +234,42 @@
             </div>
         </div>
     </section>
+
+    @if($commercialImages->count() > 2)
+        <script>
+        (function () {
+            const imgs = @json($commercialImages->values());
+            const container = document.getElementById('commercial-images');
+            if (!container) return;
+            const slots = container.querySelectorAll('img[data-slot]');
+            if (slots.length < 2) return;
+
+            let idx = 0;
+            const INTERVAL = 4000;
+            const FADE_MS  = 600;
+
+            function step() {
+                idx = (idx + 2) % imgs.length;
+                const a = imgs[idx];
+                const b = imgs[(idx + 1) % imgs.length];
+
+                slots[0].style.opacity = '0';
+                slots[1].style.opacity = '0';
+
+                setTimeout(() => {
+                    slots[0].src = a.src;
+                    slots[0].alt = a.alt;
+                    slots[1].src = b.src;
+                    slots[1].alt = b.alt;
+                    slots[0].style.opacity = '1';
+                    slots[1].style.opacity = '1';
+                }, FADE_MS);
+            }
+
+            setInterval(step, INTERVAL);
+        })();
+        </script>
+    @endif
 
     <!-- CINEMATIC SHOWREEL SECTION -->
     <section class="showreel">
@@ -346,120 +448,46 @@
                 <h2>The Gallery</h2>
             </div>
 
-            <div class="gallery-filters">
-                <button class="filter-btn active" data-filter="all">ALL</button>
-                <button class="filter-btn" data-filter="weddings">WEDDINGS</button>
-                <button class="filter-btn" data-filter="preweddings">PRE-WEDDINGS</button>
-                <button class="filter-btn" data-filter="events">EVENTS</button>
-                <button class="filter-btn" data-filter="commercial">COMMERCIAL</button>
-                <button class="filter-btn" data-filter="fashion">FASHION</button>
-                <button class="filter-btn" data-filter="architecture">ARCHITECTURE</button>
-            </div>
-
-            <div class="gallery-grid">
-                <!-- Weddings -->
-                <div class="gallery-item" data-category="weddings">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding Photography">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">WEDDING</span>
-                        <h3 class="gallery-item-title">Ceremony Moment</h3>
-                    </div>
+            @if($highlights->isNotEmpty())
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">ALL</button>
+                    @foreach($highlightTags as $tag => $label)
+                        <button class="filter-btn" data-filter="{{ $tag }}">{{ strtoupper($label) }}</button>
+                    @endforeach
                 </div>
 
-                <!-- Pre-weddings -->
-                <div class="gallery-item" data-category="preweddings">
-                    <img src="https://images.unsplash.com/photo-1511285541135-f46ad50edbc1?w=600&q=80" alt="Pre-Wedding Shoot">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">PRE-WEDDING</span>
-                        <h3 class="gallery-item-title">Couple Portrait</h3>
-                    </div>
+                <div class="gallery-grid">
+                    @foreach($highlights as $h)
+                        @php $thumb = $h->type === 'video' ? $h->thumbnail_full_url : $h->media_full_url; @endphp
+                        <a href="{{ route('highlight.show', $h) }}" class="gallery-item gallery-item-link" data-category="{{ $h->tag }}" data-type="{{ $h->type }}" style="text-decoration: none; color: inherit; display: block; position: relative;">
+                            @if($thumb)
+                                <img src="{{ $thumb }}" alt="{{ $h->title }}" loading="lazy">
+                            @else
+                                <div style="width:100%; aspect-ratio:4/3; background: linear-gradient(135deg,#2a2a2a,#1a1a1a); display:flex; align-items:center; justify-content:center; color:#666; font-size:14px;">No preview</div>
+                            @endif
+                            @if($h->type === 'video')
+                                <span class="gallery-video-badge" style="position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.65); color:#fff; padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600; letter-spacing:1px; z-index:2;">▶ VIDEO</span>
+                            @endif
+                            <div class="gallery-item-overlay">
+                                <h3 class="gallery-item-title">{{ $h->title }}</h3>
+                                @if($h->description)
+                                    <p class="gallery-item-desc" style="margin-top:8px; font-size:0.9rem; opacity:0.9; line-height:1.5;">{{ \Illuminate\Support\Str::limit($h->description, 140) }}</p>
+                                @endif
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
-
-                <!-- Events -->
-                <div class="gallery-item" data-category="events">
-                    <img src="https://images.unsplash.com/photo-1585147394579-a44c8f35ec51?w=600&q=80" alt="Event Photography">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">EVENT</span>
-                        <h3 class="gallery-item-title">Celebration</h3>
-                    </div>
-                </div>
-
-                <!-- Commercial -->
-                <div class="gallery-item" data-category="commercial">
-                    <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=600&q=80" alt="Corporate Photography">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">COMMERCIAL</span>
-                        <h3 class="gallery-item-title">Brand Campaign</h3>
-                    </div>
-                </div>
-
-                <!-- Fashion -->
-                <div class="gallery-item" data-category="fashion">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" alt="Fashion Photography">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">FASHION</span>
-                        <h3 class="gallery-item-title">Editorial</h3>
-                    </div>
-                </div>
-
-                <!-- Architecture -->
-                <div class="gallery-item" data-category="architecture">
-                    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Architecture Photography">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">ARCHITECTURE</span>
-                        <h3 class="gallery-item-title">Interior Design</h3>
-                    </div>
-                </div>
-
-                <!-- More items -->
-                <div class="gallery-item" data-category="weddings">
-                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="Wedding Ceremony">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">WEDDING</span>
-                        <h3 class="gallery-item-title">Vows & Tears</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="commercial">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Brand Photography">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">COMMERCIAL</span>
-                        <h3 class="gallery-item-title">Product Shoot</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="events">
-                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" alt="Concert Event">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">EVENT</span>
-                        <h3 class="gallery-item-title">Live Performance</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="fashion">
-                    <img src="https://images.unsplash.com/photo-1500152876223-1a67cd9e91a4?w=600&q=80" alt="Fashion Model">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">FASHION</span>
-                        <h3 class="gallery-item-title">Model Portfolio</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="preweddings">
-                    <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&q=80" alt="Couple Shoot">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">PRE-WEDDING</span>
-                        <h3 class="gallery-item-title">Love Story</h3>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="architecture">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Interior Design">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-category">ARCHITECTURE</span>
-                        <h3 class="gallery-item-title">Modern Space</h3>
-                    </div>
-                </div>
-            </div>
+                <script>
+                    // Prevent modal from opening for anchor gallery items — allow default navigation
+                    document.querySelectorAll('.gallery-item-link').forEach(a => {
+                        a.addEventListener('click', function (e) {
+                            e.stopImmediatePropagation();
+                        }, true);
+                    });
+                </script>
+            @else
+                <p style="text-align:center; color: var(--text-secondary); padding: 3rem 0;">No highlights to display yet.</p>
+            @endif
         </div>
     </section>
 
@@ -479,103 +507,23 @@
             </div>
 
             <div class="faq-container">
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">Do you travel outside Ahmedabad?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            Yes, we regularly travel to nearby cities and across India for weddings, events, and commercial projects. We specialize in destination shoots and have extensive experience working in different locations.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">Do you cover destination weddings?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            Absolutely! We have covered destination weddings across India and internationally. We handle all logistics and provide comprehensive coverage for your special day, no matter where you choose to celebrate.
+                @forelse($faqs as $faq)
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">{{ $faq->question }}</h3>
+                            <div class="accordion-icon">
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                        </button>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                {!! nl2br(e($faq->answer)) !!}
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">Do you provide both photography and cinematography?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            Yes, we specialize in providing both photography and cinematography services. You can book either service individually or combine them for comprehensive coverage with beautifully coordinated styles.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">Do you offer pre-wedding shoots?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            Yes, we offer beautifully curated pre-wedding shoots at locations of your choice. We create romantic, cinematic content that tells your love story and can be used for invitations, albums, and social media.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">Do you work with brands and advertising agencies?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            Absolutely! We work extensively with advertising agencies, creative houses, and brands to produce high-quality commercial content, brand campaigns, and advertising materials tailored to your requirements.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">How can we get a quotation?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            You can contact us through our contact form, WhatsApp, or email with details of your project. We'll review your requirements and provide a customized quotation within 24-48 hours.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">How far in advance should we book?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            For weddings, we recommend booking 3-6 months in advance. For events and commercial projects, 2-4 weeks is typically sufficient. However, we accept requests based on availability, so feel free to reach out even with shorter notice.
-                        </div>
-                    </div>
-                </div>
+                @empty
+                    <p style="text-align: center; color: var(--text-secondary);">No FAQs available at the moment.</p>
+                @endforelse
             </div>
         </div>
     </section>
@@ -589,7 +537,9 @@
 
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="#contact" class="btn btn-primary btn-large">START A PROJECT</a>
-                    <a href="https://wa.me/918488888494?text=Hello%20Snap%20Spirit%20Studio!" class="btn btn-outline btn-large">WHATSAPP US</a>
+                    @if(!empty($company['whatsapp_number']))
+                        <a href="https://wa.me/{{ $company['whatsapp_number'] }}?text=Hello%20{{ urlencode($company['company_name'] ?? '') }}!" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-large">WHATSAPP US</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -602,30 +552,43 @@
                 <div class="contact-info">
                     <h2>Let's Talk About<br>Your Next Story.</h2>
 
+                    @php
+                        $cityLine = $company['city'] ?? '';
+                        if (!empty($company['state'])) { $cityLine .= ($cityLine ? ', ' : '') . $company['state']; }
+                        if (!empty($company['pincode'])) { $cityLine .= ($cityLine ? ' - ' : '') . $company['pincode']; }
+                    @endphp
                     <div class="contact-details">
                         <div class="contact-item">
                             <span class="contact-label">STUDIO</span>
                             <div class="contact-value">
-                                Snap Spirit Studio<br>
-                                8th Floor, 834 to 838 Krupal Pathsala,<br>
-                                Near Kheti Bank, Ashram Road,<br>
-                                Ahmedabad, Gujarat - 380005
+                                {{ $company['company_name'] ?? '' }}<br>
+                                @if(!empty($company['address_line_1']))
+                                    {{ $company['address_line_1'] }},<br>
+                                @endif
+                                @if(!empty($company['address_line_2']))
+                                    {{ $company['address_line_2'] }},<br>
+                                @endif
+                                {{ $cityLine }}
                             </div>
                         </div>
 
+                        @if(!empty($company['contact_phone']))
                         <div class="contact-item">
                             <span class="contact-label">PHONE</span>
                             <div class="contact-value">
-                                <a href="tel:+918488888494">+91 8488888494</a>
+                                <a href="tel:{{ preg_replace('/\s+/', '', $company['contact_phone']) }}">{{ $company['contact_phone'] }}</a>
                             </div>
                         </div>
+                        @endif
 
+                        @if(!empty($company['contact_email']))
                         <div class="contact-item">
                             <span class="contact-label">EMAIL</span>
                             <div class="contact-value">
-                                <a href="mailto:snapstudio.gmail.com">snapstudio.gmail.com</a>
+                                <a href="mailto:{{ $company['contact_email'] }}">{{ $company['contact_email'] }}</a>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
 

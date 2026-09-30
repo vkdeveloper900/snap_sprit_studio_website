@@ -87,6 +87,15 @@ return [
             'report' => false,
         ],
 
+        'highlights' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/highlights'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage/highlights',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*

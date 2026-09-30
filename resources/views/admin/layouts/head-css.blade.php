@@ -11,9 +11,6 @@
 {{-- Bootstrap Icons --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
-{{-- Global Layout CSS --}}
-<link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
-
 {{-- Admin Panel CSS --}}
 <link rel="stylesheet" href="{{ asset('assets/admin/css/layout.css') }}">
 

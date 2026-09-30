@@ -21,6 +21,17 @@ class FAQ extends Model
         'is_active' => 'boolean',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (is_null($model->order)) {
+                $model->order = (static::max('order') ?? 0) + 1;
+            }
+        });
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -29,5 +40,10 @@ class FAQ extends Model
     public function scopeByCategory($query, $category)
     {
         return $query->where('category', $category);
+    }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('order')->orderBy('id');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\FAQController;
+use App\Http\Controllers\Admin\HighlightController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -95,6 +96,23 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/{id}/edit', [FAQController::class, 'edit'])->name('edit');
         Route::put('/{id}', [FAQController::class, 'update'])->name('update');
         Route::delete('/{id}', [FAQController::class, 'destroy'])->name('destroy');
+        Route::post('/reorder', [FAQController::class, 'reorder'])->name('reorder');
+    });
+
+    // Highlights Management
+    Route::prefix('highlights')->name('admin.highlights.')->group(function () {
+        Route::get('/', [HighlightController::class, 'index'])->name('index');
+        Route::get('/create', [HighlightController::class, 'create'])->name('create');
+        Route::post('/', [HighlightController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [HighlightController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [HighlightController::class, 'update'])->name('update');
+        Route::delete('/{id}', [HighlightController::class, 'destroy'])->name('destroy');
+        Route::post('/reorder', [HighlightController::class, 'reorder'])->name('reorder');
+
+        // Nested media (gallery items on a highlight)
+        Route::post('/{id}/media', [HighlightController::class, 'storeMedia'])->name('media.store');
+        Route::delete('/{id}/media/{mediaId}', [HighlightController::class, 'destroyMedia'])->name('media.destroy');
+        Route::post('/{id}/media/reorder', [HighlightController::class, 'reorderMedia'])->name('media.reorder');
     });
 
     // Media Management
@@ -108,5 +126,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::prefix('settings')->name('admin.settings.')->group(function () {
         Route::get('/', [SettingController::class, 'edit'])->name('edit');
         Route::put('/', [SettingController::class, 'update'])->name('update');
+        Route::delete('/{id}', [SettingController::class, 'destroy'])->name('destroy');
     });
 });

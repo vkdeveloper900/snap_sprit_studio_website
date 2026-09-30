@@ -40,53 +40,71 @@
                 <div class="contact-info">
                     <h2>Let's Talk About<br>Your Next Story.</h2>
 
+                    @php
+                        $cityLine = $company['city'] ?? '';
+                        if (!empty($company['state'])) { $cityLine .= ($cityLine ? ', ' : '') . $company['state']; }
+                        if (!empty($company['pincode'])) { $cityLine .= ($cityLine ? ' - ' : '') . $company['pincode']; }
+                    @endphp
                     <div class="contact-details">
                         <div class="contact-item">
                             <span class="contact-label">STUDIO ADDRESS</span>
                             <div class="contact-value">
-                                Snap Spirit Studio<br>
-                                8th Floor, 834 to 838 Krupal Pathsala,<br>
-                                Near Kheti Bank, Ashram Road,<br>
-                                Ahmedabad, Gujarat - 380005<br>
-                                India
+                                {{ $company['company_name'] ?? '' }}<br>
+                                @if(!empty($company['address_line_1']))
+                                    {{ $company['address_line_1'] }},<br>
+                                @endif
+                                @if(!empty($company['address_line_2']))
+                                    {{ $company['address_line_2'] }},<br>
+                                @endif
+                                {{ $cityLine }}<br>
+                                {{ $company['country'] ?? '' }}
                             </div>
                         </div>
 
+                        @if(!empty($company['contact_phone']))
                         <div class="contact-item">
                             <span class="contact-label">PHONE</span>
                             <div class="contact-value">
-                                <a href="tel:+918488888494">+91 8488888494</a>
+                                <a href="tel:{{ preg_replace('/\s+/', '', $company['contact_phone']) }}">{{ $company['contact_phone'] }}</a>
                             </div>
                         </div>
+                        @endif
 
+                        @if(!empty($company['whatsapp_number']))
                         <div class="contact-item">
                             <span class="contact-label">WHATSAPP</span>
                             <div class="contact-value">
-                                <a href="https://wa.me/918488888494?text=Hello%20Snap%20Spirit%20Studio!">+91 8488888494</a>
+                                <a href="https://wa.me/{{ $company['whatsapp_number'] }}?text=Hello%20{{ urlencode($company['company_name'] ?? '') }}!" target="_blank" rel="noopener noreferrer">{{ $company['contact_phone'] ?? $company['whatsapp_number'] }}</a>
                             </div>
                         </div>
+                        @endif
 
+                        @if(!empty($company['contact_email']))
                         <div class="contact-item">
                             <span class="contact-label">EMAIL</span>
                             <div class="contact-value">
-                                <a href="mailto:snapstudio.gmail.com">snapstudio.gmail.com</a>
+                                <a href="mailto:{{ $company['contact_email'] }}">{{ $company['contact_email'] }}</a>
                             </div>
                         </div>
+                        @endif
 
+                        @if(!empty($company['instagram_url']))
                         <div class="contact-item">
                             <span class="contact-label">INSTAGRAM</span>
                             <div class="contact-value">
-                                <a href="https://instagram.com/snapspiritstudio" target="_blank" rel="noopener noreferrer">@snapspiritstudio</a>
+                                <a href="{{ $company['instagram_url'] }}" target="_blank" rel="noopener noreferrer">{{ $company['instagram_handle'] ?? '@snapspiritstudio' }}</a>
                             </div>
                         </div>
+                        @endif
 
+                        @if(!empty($company['business_hours']))
                         <div class="contact-item">
                             <span class="contact-label">BUSINESS HOURS</span>
                             <div class="contact-value">
-                                Monday - Saturday: 10:00 AM - 7:00 PM<br>
-                                Sunday: 12:00 PM - 6:00 PM
+                                {!! nl2br(e($company['business_hours'])) !!}
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
 
@@ -155,75 +173,23 @@
             </div>
 
             <div class="faq-container">
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">What is your response time?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            We typically respond to all inquiries within 24 hours during business days. For urgent queries, you can reach us directly via WhatsApp or phone call.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">Do you offer customized packages?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            Yes! Every project is unique. We create customized packages based on your specific needs, budget, and vision. Let's discuss what works best for you.
+                @forelse($faqs as $faq)
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">{{ $faq->question }}</h3>
+                            <div class="accordion-icon">
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                        </button>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                {!! nl2br(e($faq->answer)) !!}
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">What is your cancellation policy?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            Our cancellation policy is discussed during the booking process and included in the agreement. We're flexible and understand that circumstances can change. Contact us to discuss your specific situation.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">How long does post-production take?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            Post-production timelines vary based on project complexity. Typically, edited photos are delivered within 2-3 weeks, and cinematic videos within 4-6 weeks. Rush deliveries can be arranged for additional fees.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <h3 class="accordion-title">Do you provide albums and prints?</h3>
-                        <div class="accordion-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            We can arrange premium albums, prints, and other physical deliverables through our trusted vendors. Quality and customization options are available across all price ranges.
-                        </div>
-                    </div>
-                </div>
+                @empty
+                    <p style="text-align: center; color: var(--text-secondary);">No FAQs available at the moment.</p>
+                @endforelse
             </div>
         </div>
     </section>
@@ -236,7 +202,9 @@
                 <p>Send us your project details or reach out directly via WhatsApp.</p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="#contact" class="btn btn-primary btn-large">FILL THE FORM ABOVE</a>
-                    <a href="https://wa.me/918488888494?text=Hello%20Snap%20Spirit%20Studio!" class="btn btn-outline btn-large">WHATSAPP NOW</a>
+                    @if(!empty($company['whatsapp_number']))
+                        <a href="https://wa.me/{{ $company['whatsapp_number'] }}?text=Hello%20{{ urlencode($company['company_name'] ?? '') }}!" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-large">WHATSAPP NOW</a>
+                    @endif
                 </div>
             </div>
         </div>
